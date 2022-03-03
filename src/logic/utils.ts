@@ -117,16 +117,16 @@ export function checkPass(result: MatchResult[]) {
   return result.every(r => r.char === 'exact')
 }
 
-export function getHint(word: string) {
-  return word[Math.floor(seedrandom(word)() * word.length)]
-}
-
 export function getPinyin(word: string) {
   const simplifiedWord = toSimplified(word)
   const data = IDIOMS.find(d => d[0] === simplifiedWord || d[0] === word)
   if (data && data[1])
     return data[1].split(/\s+/g)
   return Pinyin(simplifiedWord, { style: Pinyin.STYLE_TONE2 }).map(i => i[0])
+}
+
+export function getHint(word: string) {
+  return word[Math.floor(seedrandom(word)() * word.length)]
 }
 
 const numberChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']

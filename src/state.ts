@@ -34,18 +34,13 @@ export const daySince = useDebounce(computed(() => Math.floor((+now.value - +STA
 export const dayNo = ref(+(params.get('d') || daySince.value))
 export const dayNoHanzi = computed(() => `${numberToHanzi(dayNo.value)}日`)
 export const answer = computed(() =>
-  params.get('word')
-    ? {
-      word: params.get('word')!,
-      hint: getHint(params.get('word')!),
-    }
-    : getAnswerOfDay(dayNo.value),
+    getAnswerOfDay(dayNo.value),
 )
 
 export const hint = computed(() => answer.value.hint)
 export const parsedAnswer = computed(() => parseWord(answer.value.word))
 
-export const isPassed = computed(() => meta.value.passed || (tries.value.length && checkPass(testAnswer(parseWord(tries.value[tries.value.length - 1])))))
+export const isPassed = computed(() => (tries.value.length && checkPass(testAnswer(parseWord(tries.value[tries.value.length - 1])))))
 export const isFailed = computed(() => !isPassed.value && tries.value.length >= TRIES_LIMIT)
 export const isFinished = computed(() => isPassed.value || meta.value.answer)
 
