@@ -20,7 +20,6 @@ export const meta = computed<TriesMeta>({
     return history.value[dayNo.value]
   },
   set(v) {
-    history.value[dayNo.value] = v
   },
 })
 
