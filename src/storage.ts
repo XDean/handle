@@ -13,6 +13,8 @@ export const hardMode = useStorage('handle-hard-mode', false)
 export const checkAssist = useStorage('handle-check-assist', false)
 export const acceptCollecting = useStorage('handle-accept-collecting', true)
 
+history.value = []
+
 export const meta = computed<TriesMeta>({
   get() {
     if (!(dayNo.value in history.value))
@@ -20,6 +22,7 @@ export const meta = computed<TriesMeta>({
     return history.value[dayNo.value]
   },
   set(v) {
+    history.value[dayNo.value] = v
   },
 })
 
